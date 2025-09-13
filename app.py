@@ -9,24 +9,32 @@ from typing import Dict, Any, Optional
 
 # Page configuration
 st.set_page_config(
-    page_title="Travel Data Dashboard",
-    page_icon="✈️",
+    page_title="Accommodation Dashboard",
+    page_icon="🏨",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
 @st.cache_data
 def load_data() -> pd.DataFrame:
-    """Load and cache the travel data"""
+    """Load and cache the accommodation data"""
     try:
         if os.path.exists("travel_data.csv"):
             df = pd.read_csv("travel_data.csv")
             
-            # Convert date columns to datetime if they exist
-            date_columns = ['date', 'departure_date', 'arrival_date', 'booking_date', 'travel_date']
+            # Handle European number format in cost column (spaces as thousands separator, comma as decimal)
+            if 'total price of stay' in df.columns:
+                df['total price of stay'] = df['total price of stay'].astype(str).str.replace(' ', '').str.replace(',', '.').astype(float)
+            
+            # Convert date columns to datetime
+            date_columns = ['check in', 'check out']
             for col in date_columns:
                 if col in df.columns:
-                    df[col] = pd.to_datetime(df[col], errors='coerce')
+                    df[col] = pd.to_datetime(df[col], format='%d.%m.%Y', errors='coerce')
+            
+            # Create a combined destination column
+            if 'country' in df.columns and 'location' in df.columns:
+                df['destination'] = df['location'].astype(str) + ', ' + df['country'].astype(str)
             
             return df
         else:
@@ -47,7 +55,7 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
     metrics['total_trips'] = len(df)
     
     # Cost metrics if cost column exists
-    cost_columns = ['cost', 'price', 'amount', 'total_cost', 'expense']
+    cost_columns = ['total price of stay', 'cost', 'price', 'amount', 'total_cost', 'expense']
     cost_col = None
     for col in cost_columns:
         if col in df.columns:
@@ -72,8 +80,8 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
         metrics['unique_destinations'] = df[dest_col].nunique()
         metrics['top_destination'] = df[dest_col].value_counts().index[0] if not df[dest_col].value_counts().empty else "N/A"
     
-    # Travel type metrics
-    type_columns = ['travel_type', 'type', 'category', 'mode']
+    # Platform metrics (accommodation booking platform)
+    type_columns = ['platform', 'travel_type', 'type', 'category', 'mode']
     type_col = None
     for col in type_columns:
         if col in df.columns:
@@ -81,13 +89,13 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
             break
     
     if type_col:
-        metrics['travel_types'] = df[type_col].nunique()
+        metrics['booking_platforms'] = df[type_col].nunique()
     
     return metrics
 
 def create_cost_visualization(df: pd.DataFrame) -> None:
-    """Create cost-related visualizations"""
-    cost_columns = ['cost', 'price', 'amount', 'total_cost', 'expense']
+    """Create accommodation cost visualizations"""
+    cost_columns = ['total price of stay', 'cost', 'price', 'amount', 'total_cost', 'expense']
     cost_col = None
     for col in cost_columns:
         if col in df.columns:
@@ -95,7 +103,7 @@ def create_cost_visualization(df: pd.DataFrame) -> None:
             break
     
     if not cost_col:
-        st.warning("No cost data found in the dataset")
+        st.warning("No accommodation cost data found in the dataset")
         return
     
     col1, col2 = st.columns(2)
@@ -105,15 +113,16 @@ def create_cost_visualization(df: pd.DataFrame) -> None:
         fig_hist = px.histogram(
             df, 
             x=cost_col, 
-            title=f"Distribution of {cost_col.title()}",
-            nbins=20
+            title="Distribution of Accommodation Costs",
+            nbins=20,
+            labels={'x': 'Cost (€)', 'y': 'Number of Stays'}
         )
         fig_hist.update_layout(showlegend=False)
         st.plotly_chart(fig_hist, use_container_width=True)
     
     with col2:
         # Cost over time if date column exists
-        date_columns = ['date', 'departure_date', 'arrival_date', 'booking_date', 'travel_date']
+        date_columns = ['check in', 'check out', 'date', 'departure_date', 'arrival_date', 'booking_date', 'travel_date']
         date_col = None
         for col in date_columns:
             if col in df.columns:
@@ -127,12 +136,13 @@ def create_cost_visualization(df: pd.DataFrame) -> None:
                     df_time.sort_values(date_col), 
                     x=date_col, 
                     y=cost_col,
-                    title=f"{cost_col.title()} Over Time"
+                    title="Accommodation Costs Over Time",
+                    labels={'x': 'Date', 'y': 'Cost (€)'}
                 )
                 st.plotly_chart(fig_time, use_container_width=True)
         else:
-            # Box plot by travel type if available
-            type_columns = ['travel_type', 'type', 'category', 'mode']
+            # Box plot by booking platform if available
+            type_columns = ['platform', 'travel_type', 'type', 'category', 'mode']
             type_col = None
             for col in type_columns:
                 if col in df.columns:
@@ -144,7 +154,8 @@ def create_cost_visualization(df: pd.DataFrame) -> None:
                     df, 
                     x=type_col, 
                     y=cost_col,
-                    title=f"{cost_col.title()} by {type_col.title()}"
+                    title="Accommodation Costs by Booking Platform",
+                    labels={'x': 'Platform', 'y': 'Cost (€)'}
                 )
                 st.plotly_chart(fig_box, use_container_width=True)
 
@@ -170,7 +181,7 @@ def create_destination_visualization(df: pd.DataFrame) -> None:
             x=dest_counts.index,
             y=dest_counts.values,
             title=f"Top 10 {dest_col.title()}s",
-            labels={'x': dest_col.title(), 'y': 'Number of Trips'}
+            labels={'x': dest_col.title(), 'y': 'Number of Stays'}
         )
         fig_bar.update_xaxes(tickangle=45)
         st.plotly_chart(fig_bar, use_container_width=True)
@@ -185,9 +196,9 @@ def create_destination_visualization(df: pd.DataFrame) -> None:
         )
         st.plotly_chart(fig_pie, use_container_width=True)
 
-def create_travel_patterns_visualization(df: pd.DataFrame) -> None:
-    """Create travel pattern visualizations"""
-    date_columns = ['date', 'departure_date', 'arrival_date', 'booking_date', 'travel_date']
+def create_accommodation_patterns_visualization(df: pd.DataFrame) -> None:
+    """Create accommodation booking pattern visualizations"""
+    date_columns = ['check in', 'check out', 'date', 'departure_date', 'arrival_date', 'booking_date', 'travel_date']
     date_col = None
     for col in date_columns:
         if col in df.columns:
@@ -195,7 +206,7 @@ def create_travel_patterns_visualization(df: pd.DataFrame) -> None:
             break
     
     if not date_col:
-        st.warning("No date data found for travel patterns analysis")
+        st.warning("No date data found for accommodation patterns analysis")
         return
     
     df_clean = df.dropna(subset=[date_col])
@@ -206,7 +217,7 @@ def create_travel_patterns_visualization(df: pd.DataFrame) -> None:
     col1, col2 = st.columns(2)
     
     with col1:
-        # Monthly travel frequency
+        # Monthly accommodation bookings
         df_clean['month'] = df_clean[date_col].dt.month_name()
         monthly_counts = df_clean['month'].value_counts()
         
@@ -218,13 +229,13 @@ def create_travel_patterns_visualization(df: pd.DataFrame) -> None:
         fig_monthly = px.bar(
             x=monthly_counts.index,
             y=monthly_counts.values,
-            title="Travel Frequency by Month",
-            labels={'x': 'Month', 'y': 'Number of Trips'}
+            title="Accommodation Bookings by Month",
+            labels={'x': 'Month', 'y': 'Number of Stays'}
         )
         st.plotly_chart(fig_monthly, use_container_width=True)
     
     with col2:
-        # Day of week analysis
+        # Day of week booking analysis
         df_clean['day_of_week'] = df_clean[date_col].dt.day_name()
         dow_counts = df_clean['day_of_week'].value_counts()
         
@@ -235,28 +246,28 @@ def create_travel_patterns_visualization(df: pd.DataFrame) -> None:
         fig_dow = px.bar(
             x=dow_counts.index,
             y=dow_counts.values,
-            title="Travel Frequency by Day of Week",
-            labels={'x': 'Day of Week', 'y': 'Number of Trips'}
+            title="Check-in Frequency by Day of Week",
+            labels={'x': 'Day of Week', 'y': 'Number of Stays'}
         )
         st.plotly_chart(fig_dow, use_container_width=True)
 
 def main() -> None:
     """Main application function"""
-    st.title("✈️ Travel Data Dashboard")
+    st.title("🏨 Accommodation Dashboard")
     st.markdown("---")
     
     # Load data
     df = load_data()
     
     if df.empty:
-        st.warning("No data available. Please ensure travel_data.csv exists and contains valid data.")
+        st.warning("No data available. Please ensure travel_data.csv exists and contains valid accommodation data.")
         st.stop()
     
     # Sidebar filters
     st.sidebar.header("🔍 Filters")
     
     # Date range filter
-    date_columns = ['date', 'departure_date', 'arrival_date', 'booking_date', 'travel_date']
+    date_columns = ['check in', 'check out', 'date', 'departure_date', 'arrival_date', 'booking_date', 'travel_date']
     date_col = None
     for col in date_columns:
         if col in df.columns:
@@ -270,7 +281,7 @@ def main() -> None:
             max_date = df_clean_dates[date_col].max().date()
             
             selected_dates = st.sidebar.date_input(
-                "Select Date Range",
+                "Select Check-in Date Range",
                 value=(min_date, max_date),
                 min_value=min_date,
                 max_value=max_date
@@ -301,8 +312,8 @@ def main() -> None:
         if selected_destinations:
             df = df[df[dest_col].isin(selected_destinations)]
     
-    # Travel type filter
-    type_columns = ['travel_type', 'type', 'category', 'mode']
+    # Booking platform filter
+    type_columns = ['platform', 'travel_type', 'type', 'category', 'mode']
     type_col = None
     for col in type_columns:
         if col in df.columns:
@@ -310,14 +321,14 @@ def main() -> None:
             break
     
     if type_col:
-        travel_types = df[type_col].dropna().unique()
-        selected_types = st.sidebar.multiselect(
-            f"Select {type_col.title()}(s)",
-            options=travel_types,
-            default=travel_types
+        platforms = df[type_col].dropna().unique()
+        selected_platforms = st.sidebar.multiselect(
+            "Select Booking Platform(s)",
+            options=platforms,
+            default=platforms
         )
-        if selected_types:
-            df = df[df[type_col].isin(selected_types)]
+        if selected_platforms:
+            df = df[df[type_col].isin(selected_platforms)]
     
     # Summary metrics
     st.header("📊 Summary Statistics")
@@ -328,7 +339,7 @@ def main() -> None:
         for i, (key, value) in enumerate(metrics.items()):
             with cols[i % len(cols)]:
                 if isinstance(value, (int, float)) and key.endswith('cost'):
-                    st.metric(key.replace('_', ' ').title(), f"${value:,.2f}")
+                    st.metric(key.replace('_', ' ').title(), f"€{value:,.2f}")
                 elif isinstance(value, (int, float)):
                     st.metric(key.replace('_', ' ').title(), f"{value:,}")
                 else:
@@ -338,21 +349,21 @@ def main() -> None:
     
     # Visualizations
     if not df.empty:
-        # Cost Analysis
-        st.header("💰 Cost Analysis")
+        # Accommodation Cost Analysis
+        st.header("💰 Accommodation Cost Analysis")
         create_cost_visualization(df)
         
         st.markdown("---")
         
-        # Destination Analysis
-        st.header("🌍 Destination Analysis")
+        # Location Analysis
+        st.header("🌍 Accommodation Locations")
         create_destination_visualization(df)
         
         st.markdown("---")
         
-        # Travel Patterns
-        st.header("📈 Travel Patterns")
-        create_travel_patterns_visualization(df)
+        # Booking Patterns
+        st.header("📈 Booking Patterns")
+        create_accommodation_patterns_visualization(df)
         
         st.markdown("---")
         
@@ -365,7 +376,7 @@ def main() -> None:
         st.download_button(
             label="Download Filtered Data as CSV",
             data=csv_data,
-            file_name=f"filtered_travel_data_{datetime.now().strftime('%Y%m%d')}.csv",
+            file_name=f"filtered_accommodation_data_{datetime.now().strftime('%Y%m%d')}.csv",
             mime="text/csv"
         )
     else:
