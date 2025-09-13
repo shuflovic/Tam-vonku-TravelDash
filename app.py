@@ -51,8 +51,18 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
     
     metrics = {}
     
+    # Days on the Road - total trip duration
+    if 'check in' in df.columns and 'check out' in df.columns:
+        df_dates = df.dropna(subset=['check in', 'check out'])
+        if not df_dates.empty:
+            first_day = df_dates['check in'].min()
+            last_day = df_dates['check out'].max()
+            if pd.notna(first_day) and pd.notna(last_day):
+                total_days = (last_day - first_day).days + 1
+                metrics['days_on_road'] = total_days
+    
     # Basic metrics
-    metrics['total_trips'] = len(df)
+    metrics['total_stays'] = len(df)
     
     # Cost metrics if cost column exists
     cost_columns = ['total price of stay', 'cost', 'price', 'amount', 'total_cost', 'expense']
@@ -335,15 +345,23 @@ def main() -> None:
     metrics = create_summary_metrics(df)
     
     if metrics:
-        cols = st.columns(len(metrics))
-        for i, (key, value) in enumerate(metrics.items()):
-            with cols[i % len(cols)]:
-                if isinstance(value, (int, float)) and key.endswith('cost'):
-                    st.metric(key.replace('_', ' ').title(), f"€{value:,.2f}")
-                elif isinstance(value, (int, float)):
-                    st.metric(key.replace('_', ' ').title(), f"{value:,}")
-                else:
-                    st.metric(key.replace('_', ' ').title(), str(value))
+        # Show Days on the Road prominently first if available
+        if 'days_on_road' in metrics:
+            st.metric("🗓️ Days on the Road", f"{metrics['days_on_road']:,} days", help="Total duration from first check-in to last check-out")
+            st.markdown("---")
+        
+        # Display other metrics in columns
+        other_metrics = {k: v for k, v in metrics.items() if k != 'days_on_road'}
+        if other_metrics:
+            cols = st.columns(len(other_metrics))
+            for i, (key, value) in enumerate(other_metrics.items()):
+                with cols[i % len(cols)]:
+                    if isinstance(value, (int, float)) and key.endswith('cost'):
+                        st.metric(key.replace('_', ' ').title(), f"€{value:,.2f}")
+                    elif isinstance(value, (int, float)):
+                        st.metric(key.replace('_', ' ').title(), f"{value:,}")
+                    else:
+                        st.metric(key.replace('_', ' ').title(), str(value))
     
     st.markdown("---")
     
