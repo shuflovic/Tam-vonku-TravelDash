@@ -1,0 +1,31 @@
+date,destination,travel_type,cost,duration_days,purpose
+2024-01-15,Paris,Flight,1250.00,5,Vacation
+2024-02-28,Tokyo,Flight,2100.00,7,Business
+2024-03-12,New York,Flight,850.00,3,Conference
+2024-04-05,Barcelona,Flight,950.00,4,Vacation
+2024-04-22,London,Train,320.00,2,Business
+2024-05-18,Rome,Flight,1100.00,6,Vacation
+2024-06-03,Berlin,Flight,750.00,4,Conference
+2024-06-25,Amsterdam,Train,280.00,3,Vacation
+2024-07-14,Vienna,Flight,680.00,4,Cultural
+2024-08-02,Prague,Train,180.00,2,Weekend Trip
+2024-08-20,Copenhagen,Flight,920.00,5,Vacation
+2024-09-10,Stockholm,Flight,850.00,4,Business
+2024-09-28,Helsinki,Flight,780.00,3,Conference
+2024-10-15,Oslo,Flight,1050.00,5,Vacation
+2024-11-05,Zurich,Train,450.00,2,Business
+2024-11-22,Milan,Flight,650.00,3,Fashion Week
+2024-12-08,Munich,Train,380.00,2,Christmas Market
+2024-12-20,Brussels,Train,220.00,2,Holiday
+2023-12-15,Madrid,Flight,720.00,4,Vacation
+2023-11-30,Lisbon,Flight,680.00,5,Cultural
+2023-10-18,Dublin,Flight,590.00,3,Business
+2023-09-22,Edinburgh,Train,340.00,3,Festival
+2023-08-14,Nice,Flight,890.00,6,Summer Holiday
+2023-07-28,Monaco,Car,150.00,1,Day Trip
+2023-06-12,Geneva,Train,520.00,2,Business
+2023-05-25,Lyon,Train,180.00,2,Food Tour
+2023-04-08,Marseille,Flight,420.00,3,Weekend Trip
+2023-03-20,Bordeaux,Train,250.00,2,Wine Tasting
+2023-02-14,Venice,Flight,780.00,4,Romantic Getaway
+2023-01-28,Florence,Train,320.00,3,Art Tour
