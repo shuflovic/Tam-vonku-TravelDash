@@ -27,7 +27,7 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 26,sri lanka,negombo,booking.com,10.04.2024,11.04.2024,1,"7,59",2,"3,80",house of esanya
 27,hungary,budapest,transport,11.04.2024,12.04.2024,1,"0,00",2,"0,00",airport budapest
 28,austria,vienna,transport,12.04.2024,13.04.2024,1,"0,00",2,"0,00",airport vienna
-29,sweden,hargs bro,company's choice,13.04.2024,01.06.2024,49,"1 013,32",2,"10,34",hargs bro
+29,sweden,hargs bro,company's choice,13.04.2024,01.06.2024,49,"1013,32",2,"10,34",hargs bro
 30,sweden,backefors,workaway,01.06.2024,22.06.2024,21,"0,00",2,"0,00",backefors
 31,sweden,goteborg,booking.com,22.06.2024,24.06.2024,2,"100,76",2,"25,19",hostel goteborg
 32,sweden,stockholm,booking.com,24.06.2024,25.06.2024,1,"43,35",2,"21,68",grad hotel and hostel
@@ -120,4 +120,5 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 119,Australia,melbourne,booking.com,30.08.2025,03.09.2025,4,"202,79",2,"25,35",miami hotel melbourne
 120,Australia,melbourne to auckland,flight,03.09.2025,04.09.2025,1,0,2,"0,00",night flight auckland
 121,new zealand,new plymouth,booking.com,04.09.2025,05.09.2025,1,"40,23",2,"20,12",ariki hostel
+
 122,new zealand,new plymouth,workaway,05.09.2025,14.09.2025,9,0,2,"0,00",dee
