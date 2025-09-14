@@ -75,9 +75,10 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
             break
 
     if cost_col:
-        metrics['total_cost'] = df[cost_col].sum()
+        metrics['total_cost of accommodation'] = df[cost_col].sum()
    #     metrics['avg_cost'] = df[cost_col].mean()
-        metrics['average per peron per night'] = df[cost_col].sum() / 2 / metrics['days_on_road']
+        avg_cost = round(df[cost_col].sum() / 2 / metrics['days_on_road'], 2)
+        metrics['average per person per night'] = f'€ {avg_cost}'
    #     metrics['max_cost'] = df[cost_col].max()
    #     metrics['min_cost'] = df[cost_col].min()
 
@@ -102,11 +103,8 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
             break
 
     if type_col:
-        # Get the number of unique booking platforms
-        metrics['booking_platforms'] = df[type_col].nunique()
 
         # Count the number of unique Workaway projects
-        # This is the new logic based on your request
         if 'accommodation' in df.columns:
             workaway_projects = df[df[type_col].str.lower() == 'workaway']['accommodation'].nunique()
             metrics['unique_workaway_projects'] = workaway_projects
