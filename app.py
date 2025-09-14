@@ -18,8 +18,7 @@ def load_data() -> pd.DataFrame:
     """Load and cache the accommodation data"""
     try:
         if os.path.exists("travel_data.csv"):
-            df = pd.read_csv("travel_data.csv")
-
+            df = pd.read_csv("travel_data.csv")  
             # Handle European number format in cost column (spaces as thousands separator, comma as decimal)
             if 'total price of stay' in df.columns:
                 df['total price of stay'] = df['total price of stay'].astype(str).str.replace(' ', '').str.replace(',', '.').astype(float)
@@ -198,16 +197,77 @@ def create_world_map(df: pd.DataFrame) -> None:
     )
     st.plotly_chart(fig, use_container_width=True)
 
-def create_country_summary(df: pd.DataFrame) -> None:
-    """Group data by country and visualize total nights and total cost."""
-    # Group by country, summing nights and total price
-    grouped_df = df.groupby('country').agg({
-        'nights': 'sum',
-        'total price of stay': 'sum'
-    }).reset_index()
+def adjust_nights(df: pd.DataFrame) -> pd.DataFrame:
+    """Adjust nights based on person column: halve nights if person is 1."""
+    df_adjusted = df.copy()
+    if 'person' in df_adjusted.columns:
+        df_adjusted['adjusted_nights'] = df_adjusted.apply(
+            lambda row: row['nights'] / 2 if pd.notna(row['person']) and row['person'] == 1 else row['nights'], 
+            axis=1
+        )
+    else:
+        st.warning("Column 'person' not found. Using original nights without adjustment.")
+        df_adjusted['adjusted_nights'] = df_adjusted['nights']
+    return df_adjusted
+
+def create_country_summary(df: pd.DataFrame, order_by: str = 'id') -> None:
+    """Group data by country and visualize total adjusted nights and total cost."""
+    # Validate DataFrame
+    if df.empty:
+        st.error("The DataFrame is empty. Please provide valid data.")
+        return
+
+    required_columns = ['country', 'nights', 'total price of stay']
+    if order_by == 'id':
+        required_columns.append('id')
+
+    missing_columns = [col for col in required_columns if col not in df.columns]
+    if missing_columns:
+        st.error(f"Missing required columns: {', '.join(missing_columns)}")
+        return
+
+    # Validate data types
+    try:
+        df['nights'] = pd.to_numeric(df['nights'], errors='coerce')
+        df['total price of stay'] = pd.to_numeric(df['total price of stay'], errors='coerce')
+        if order_by == 'id':
+            df['id'] = pd.to_numeric(df['id'], errors='coerce')
+        if 'person' in df.columns:
+            df['person'] = pd.to_numeric(df['person'], errors='coerce')
+    except Exception as e:
+        st.error(f"Error converting columns to numeric: {str(e)}")
+        return
+
+    # Check for missing values after conversion
+    if df[['country', 'nights', 'total price of stay']].isna().any().any():
+        st.warning("Some rows contain missing or invalid data and will be excluded.")
+        df = df.dropna(subset=['country', 'nights', 'total price of stay'])
+
+    if df.empty:
+        st.error("No valid data remains after cleaning. Please check your CSV.")
+        return
+
+    # Adjust nights based on person column
+    df_adjusted = adjust_nights(df)
+
+    # Group by country, summing adjusted nights and total price
+    if order_by == 'id':
+        grouped_df = df_adjusted.groupby('country').agg({
+            'adjusted_nights': 'sum',
+            'total price of stay': 'sum',
+            'id': 'first'  # Take the first id for each country to use for ordering
+        }).reset_index()
+
+        # Sort by id
+        grouped_df = grouped_df.sort_values('id').drop('id', axis=1).reset_index(drop=True)
+    else:
+        grouped_df = df_adjusted.groupby('country').agg({
+            'adjusted_nights': 'sum',
+            'total price of stay': 'sum'
+        }).reset_index()
 
     # Rename columns for clarity
-    grouped_df.columns = ['Country', 'Total Nights', 'Total Cost (€)']
+    grouped_df.columns = ['Country', 'Total Adjusted Nights', 'Total Cost (€)']
 
     # Display the grouped data table
     st.write("### Summary by Country")
@@ -216,14 +276,14 @@ def create_country_summary(df: pd.DataFrame) -> None:
     # Create two columns for visualizations
     col1, col2 = st.columns(2)
 
-    # Bar chart for total nights
+    # Bar chart for total adjusted nights
     with col1:
         fig_nights = px.bar(
             grouped_df,
             x='Country',
-            y='Total Nights',
-            title='Total Nights by Country',
-            labels={'Total Nights': 'Number of Nights'},
+            y='Total Adjusted Nights',
+            title='Total Adjusted Nights by Country',
+            labels={'Total Adjusted Nights': 'Number of Nights'},
             color='Country'
         )
         fig_nights.update_layout(showlegend=False)
@@ -241,7 +301,7 @@ def create_country_summary(df: pd.DataFrame) -> None:
         )
         fig_cost.update_layout(showlegend=False)
         st.plotly_chart(fig_cost, use_container_width=True)
-
+    
 def create_cost_visualization(df: pd.DataFrame) -> None:
     """Create accommodation cost visualizations"""
     cost_columns = ['tyotal price of sta', 'cost', 'price', 'amount', 'total_cost', 'expense']
@@ -515,7 +575,7 @@ def main() -> None:
         # Accommodation Cost Analysis
         st.header("💰 Accommodation Cost Analysis")
         #create_cost_visualization(df)
-        create_country_summary(df)
+        create_country_summary(df, order_by='id')
 
         st.markdown("---")
 
