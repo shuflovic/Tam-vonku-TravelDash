@@ -1,0 +1,123 @@
+id,country,location,platform,check in,check out,nights,total price of stay,person,average,accommodation
+1,united arab emirates,abu dhabi,Airbnb,28.01.2024,31.01.2024,3,"105,35",2,"17,56",heart of abu dhabi
+2,united arab emirates,dubai,booking.com,31.01.2024,03.02.2024,3,"62,52",2,"10,42",the hotel
+3,united arab emirates,dubai,booking.com,03.02.2024,04.02.2024,1,"24,06",2,"12,03",ruby star hostel g p-8
+4,oman,muscat,booking.com,04.02.2024,08.02.2024,4,103,2,"12,88",khorsid hostel
+5,oman,muscat,booking.com,08.02.2024,11.02.2024,3,"103,72",2,"17,29",the platinum hotel
+6,sri lanka,negombo,booking.com,11.02.2024,14.02.2024,3,"24,89",2,"4,15",rodrigo's villa & restaurant
+7,sri lanka,unawatuna,booking.com,14.02.2024,18.02.2024,4,"36,96",2,"4,62",villa ameliya
+8,sri lanka,mirissa,booking.com,18.02.2024,20.02.2024,2,"14,96",2,"3,74",ancient tree
+9,sri lanka,mirissa,booking.com,20.02.2024,22.02.2024,2,"23,94",2,"5,99",mirissa golden resort
+10,sri lanka,ella,booking.com,22.02.2024,26.02.2024,4,"53,20",2,"6,65",moonlight holiday home
+11,sri lanka,colombo,booking.com,26.02.2024,28.02.2024,2,"29,88",2,"7,47",ceylon travel and stay lodge
+12,sri lanka,delhousie,booking.com,28.02.2024,01.03.2024,2,"24,60",2,"6,15",vegetable garden
+13,sri lanka,kandy,booking.com,01.03.2024,03.03.2024,2,"30,00",2,"7,50",highest view
+14,sri lanka,anuradhapura,booking.com,03.03.2024,05.03.2024,2,"15,04",2,"3,76",meera homestay
+15,sri lanka,trincomalee,booking.com,05.03.2024,15.03.2024,10,"65,82",1,"6,58",beach life uppuveli
+16,sri lanka,anuradhapura,vipassana,05.03.2024,16.03.2024,11,"55,05",1,"5,00",vipassana
+17,sri lanka,anuradhapura,booking.com,15.03.2024,16.03.2024,1,"7,52",1,"7,52",meera homestay
+18,sri lanka,jaffna,booking.com,16.03.2024,19.03.2024,3,"36,06",2,"6,01",gnaanams hotel
+19,sri lanka,delft island,booking.com,19.03.2024,22.03.2024,3,"38,40",2,"6,40",delft village stay
+20,sri lanka,anuradhapura,booking.com,22.03.2024,23.03.2024,1,"9,75",2,"4,88",sunhill lake tourist rest
+21,sri lanka,nuwara elya,booking.com,23.03.2024,25.03.2024,2,"19,97",2,"4,99",the galways edge homestay
+22,sri lanka,ravana,workaway,25.03.2024,31.03.2024,6,"0,00",2,"0,00",ravana secret
+23,sri lanka,haphutale,booking.com,31.03.2024,03.04.2024,3,"26,39",2,"4,40",bel view
+24,sri lanka,nuwara elya,booking.com,03.04.2024,06.04.2024,3,"42,66",2,"7,11",winter villa
+25,sri lanka,colombo,Airbnb,06.04.2024,10.04.2024,4,"61,00",2,"7,63",colpetty house
+26,sri lanka,negombo,booking.com,10.04.2024,11.04.2024,1,"7,59",2,"3,80",house of esanya
+27,hungary,budapest,transport,11.04.2024,12.04.2024,1,"0,00",2,"0,00",airport budapest
+28,austria,vienna,transport,12.04.2024,13.04.2024,1,"0,00",2,"0,00",airport vienna
+29,sweden,hargs bro,company's choice,13.04.2024,01.06.2024,49,"1 013,32",2,"10,34",hargs bro
+30,sweden,backefors,workaway,01.06.2024,22.06.2024,21,"0,00",2,"0,00",backefors
+31,sweden,goteborg,booking.com,22.06.2024,24.06.2024,2,"100,76",2,"25,19",hostel goteborg
+32,sweden,stockholm,booking.com,24.06.2024,25.06.2024,1,"43,35",2,"21,68",grad hotel and hostel
+33,sweden,äkersjon,workaway,25.06.2024,26.07.2024,31,"0,00",2,"0,00",äkersjon
+34,sweden,bringasen,Airbnb,26.07.2024,29.07.2024,3,"135,54",2,"22,59",bringasen
+35,sweden,storuman,Airbnb,29.07.2024,06.08.2024,8,"369,41",2,"23,09",suterrhagus villa
+36,sweden,jokkmokk,workaway,06.08.2024,17.08.2024,11,"0,00",2,"0,00",jokkmokk
+37,sweden,storuman,Airbnb,17.08.2024,19.08.2024,2,"107,92",2,"26,98",naturnara
+38,sweden,kungsleden,wild camping,19.08.2024,24.08.2024,5,"0,00",2,"0,00",kungsleden
+39,sweden,bieverholmen,cabin,24.08.2024,26.08.2024,2,"114,34",2,"28,59",kungsleden
+40,sweden,jackvikk,hostel,26.08.2024,27.08.2024,1,"73,88",2,"36,94",kungsleden
+41,sweden,kungsleden,wild camping,27.08.2024,29.08.2024,2,"0,00",2,"0,00",kungsleden
+42,sweden,kungsleden,emergency hut,29.08.2024,30.08.2024,1,"0,00",2,"0,00",kungsleden
+43,sweden,kungsleden,wild camping,30.08.2024,06.09.2024,7,"0,00",2,"0,00",kungsleden
+44,sweden,abisko,booking.com,06.09.2024,07.09.2024,1,"88,57",2,"44,29",abisko guesthouse & activities
+45,sweden,kiruna,booking.com,07.09.2024,08.09.2024,1,"61,54",2,"30,77",kiruna accommodation timmermanasgatan 23
+46,sweden,jokkmokk,Airbnb,08.09.2024,11.09.2024,3,"149,08",2,"24,85",basic cozy living in jokkmokk
+47,sweden,ostersund,STF web site,11.09.2024,12.09.2024,1,"51,84",2,"25,92",ledkrysset
+48,sweden,akersjon,workaway,12.09.2024,20.09.2024,8,"0,00",2,"0,00",housesitting
+49,sweden,ostersund,STF web site,20.09.2024,22.09.2024,2,"103,68",2,"25,92",ledkrysset
+50,sweden,stockholm,booking.com,22.09.2024,25.09.2024,3,"185,71",2,"30,95",crafoord place hostel
+51,sweden,tvällen,workaway,25.09.2024,13.10.2024,18,"0,00",2,"0,00",housesitting/workaway
+52,poland,krakow,booking.com,13.10.2024,14.10.2024,1,"29,00",2,"14,50",dizzy daisy hostel
+53,slovakia,zlate moravce,home sweet home,14.10.2024,17.10.2024,3,"0,00",2,"0,00",home sweet home
+54,slovakia,donovaly,booking.com,17.10.2024,18.10.2024,1,"17,25",1,"17,25",chata spiezovec
+55,slovakia,donovaly,friends house,18.10.2024,19.10.2024,1,"0,00",1,"0,00",petrova chata
+56,slovakia,bratislava,Airbnb,18.10.2024,19.10.2024,1,"42,25",1,"42,25",bratislava apartments
+57,slovakia,bratislava,Airbnb,19.10.2024,20.10.2024,1,"42,25",2,"21,13",bratislava apartments
+58,bulgaria,sofia istanbul,train,20.10.2024,21.10.2024,1,"0,00",2,"0,00",night train
+59,turkey,istanbul,booking.com,21.10.2024,25.10.2024,4,"85,44",2,"10,68",bonami hotel
+60,turkey,istanbul,Airbnb,25.10.2024,29.10.2024,4,"104,70",2,"13,09",taxim academie house
+61,turkey,istanbul - ulaanbataar,plane,29.10.2024,30.10.2024,1,"0,00",2,"0,00",plane night
+62,mongolia,ulaanbaatar,booking.com,30.10.2024,02.11.2024,3,"38,00",2,"6,33",Khongor guest house & tours
+63,mongolia,ulaanbaatar,booking.com,02.11.2024,06.11.2024,4,"77,00",2,"9,63",Gana's Guest House and Tours
+64,mongolia,ulaanbaatar,booking.com,06.11.2024,08.11.2024,2,"33,59",2,"8,40",City guesthouse & tours
+65,mongolia,terelj,on the spot,08.11.2024,10.11.2024,2,"96,20",2,"24,05",terelj ulaanbaatar
+66,mongolia,ulaanbaatar,booking.com,10.11.2024,13.11.2024,3,"51,33",2,"8,56",City guesthouse & tours
+67,mongolia,khakhorin,booking.com,13.11.2024,15.11.2024,2,"104,56",2,"26,14",khakhorin hostel
+68,mongolia,ulaanbaatar,booking.com,15.11.2024,17.11.2024,2,"31,37",2,"7,84",Mongolian Vision Tours
+69,mongolia,ulaanbaatar,booking.com,17.11.2024,21.11.2024,4,"69,46",2,"8,68",City guesthouse & tours
+70,south korea,seoul,Airbnb,21.11.2024,28.11.2024,7,"213,76",2,"15,27",close to sillim metro station
+71,south korea,busan,booking.com,28.11.2024,01.12.2024,3,"72,60",2,"12,10",one way guesthouse busan
+72,south korea,busan,booking.com,01.12.2024,03.12.2024,2,"39,35",2,"9,84",stay well hotel
+73,south korea,jeonju,booking.com,03.12.2024,04.12.2024,1,"18,88",2,"9,44",danaharu guesthouse
+74,south korea,gwangju,Airbnb,04.12.2024,15.12.2024,11,"172,32",1,"15,67",pavel solo
+75,south korea,gwangju - close,vipassana,04.12.2024,15.12.2024,11,"0,00",1,"0,00",daniela solo
+76,south korea,seoul,Airbnb,15.12.2024,18.12.2024,3,"89,50",2,"14,92",j5 hostel
+77,japan,tokio,booking.com,18.12.2024,22.12.2024,4,"258,13",2,"32,27",uhome kamiitabashi apartment
+78,japan,tanigawa,workaway,22.12.2024,21.01.2025,30,"0,00",2,"0,00",tanigawa valley lodge
+79,japan,niigata,booking.com,21.01.2025,23.01.2025,2,"64,58",2,"16,15",niigata keihin hotel
+80,japan,tanigawa,workaway,23.01.2025,14.02.2025,22,"0,00",2,"0,00",tanigawa valley lodge
+81,japan,maebashi,booking.com,14.02.2025,15.02.2025,1,"33,88",2,"16,94",hotel anzera
+82,japan,tanigawa,workaway,15.02.2025,12.03.2025,25,"0,00",2,"0,00",tanigawa valley lodge
+83,japan,yokohama,booking.com,12.03.2025,15.03.2025,3,"59,31",2,"9,89",yokohama hostel village
+84,japan,tokyo,booking.com,15.03.2025,18.03.2025,3,"110,95",2,"18,49",wabi sabi hostel
+85,hong kong,hong kong,booking.com,18.03.2025,22.03.2025,4,"119,19",2,"14,90",relaince lucky mirador mansion
+86,hong kong,hong kong,booking.com,22.03.2025,02.04.2025,11,"446,10",2,"20,28",premium lounge
+87,china,shenzen,booking.com,02.04.2025,06.04.2025,4,"88,70",2,"11,09",weizhanwan hotel shenzhen international convention and exhibition center
+88,china,guangzhou-haikou,train,06.04.2025,07.04.2025,1,"0,00",2,"0,00",night in train
+89,china,sanya,trip.com,07.04.2025,13.04.2025,6,"61,51",2,"5,13",nashanmen boutique inn (sanya bay pedestrian street)
+90,china,haikou,trip.com,13.04.2025,15.04.2025,2,"33,72",2,"8,43",meilan mantu hotel
+91,china,beihai,trip.com,15.04.2025,19.04.2025,4,53,2,"6,63",aizhihai
+92,vietnam,mong cai,booking.com,19.04.2025,20.04.2025,1,"12,05",2,"6,03",royal homestay
+93,vietnam,cat ba town,trip.com,20.04.2025,23.04.2025,3,"25,31",2,"4,22",sunrise hotel
+94,vietnam,hanoi,trip.com,23.04.2025,27.04.2025,4,"60,36",2,"7,55",la sen west lake tay ho homestay
+95,vietnam,hanoi,trip.com,27.04.2025,01.05.2025,4,"41,04",2,"5,13",era apartment duong lang
+96,vietnam,mai chau,booking.com,01.05.2025,06.05.2025,5,"69,64",2,"6,96",mai chau happy house
+97,vietnam,son la,random,06.05.2025,08.05.2025,2,"17,1",2,"4,28",hotel hoang anh
+98,vietnam,dien bien phu,trip.com,08.05.2025,09.05.2025,1,"6,18",2,"3,09",frontier hostel
+99,laos,luang prabang,trip.com,09.05.2025,16.05.2025,7,"75,88",2,"5,42",singharar guesthouse
+100,laos,vang vieng,trip.com,16.05.2025,22.05.2025,6,"61,3",2,"5,11",Khampaseuth Hotel
+101,laos,vientiane,trip.com,22.05.2025,27.05.2025,5,"77,61",2,"7,76",mali namphu hotel
+102,laos,lak sao,random,27.05.2025,28.05.2025,1,"8,18",2,"4,09",hotel phouthavong
+103,Vietnam,vinh,random,28.05.2025,30.05.2025,2,"14,98",2,"3,75",thanh dat 2 hotel
+104,Vietnam,dong hoi,random,30.05.2025,01.06.2025,2,"19,24",2,"4,81",nam long hotel
+105,Vietnam,hue,booking.com,01.06.2025,04.06.2025,3,"23,52",2,"3,92",hotel casablanka
+106,Vietnam,hoi an,booking.com,04.06.2025,07.06.2025,3,"23,85",2,"3,98",golden bee homestay
+107,Vietnam,quy nhon,trip.com,07.06.2025,08.06.2025,1,12,2,"6,00",than than hotel
+108,Vietnam,phu thuong,workaway,08.06.2025,15.06.2025,7,0,2,"0,00",mark and hai
+109,Vietnam,nha trang,trip.com,15.06.2025,16.06.2025,1,"9,12",2,"4,56",starlight
+110,Vietnam,da lat,booking.com,16.06.2025,18.06.2025,2,"16,64",2,"4,16",the lovely house
+111,Vietnam,ho chi minh,trip.com,18.06.2025,23.06.2025,5,"47,32",2,"4,73",phan hotel ho chi minh
+112,Vietnam,airport,plane,23.06.2025,24.06.2025,1,0,2,"0,00",night flight
+113,Australia,Hobart,Airbnb,24.06.2025,27.06.2025,3,"103,56",2,"17,26",sunny and modern hobart stay
+114,Australia,weetah,workaway,27.06.2025,14.07.2025,17,0,2,"0,00",andy $ linda
+115,Australia,sorell,workaway,14.07.2025,02.08.2025,19,0,2,"0,00",luna lodge tasmania
+116,Australia,hobart,booking.com,02.08.2025,05.08.2025,3,"153,84",2,"25,64",travelodge hotel hobart
+117,Australia,wilmot,workaway,05.08.2025,26.08.2025,21,0,2,"0,00",peter & susie
+118,Australia,launceston,booking.com,26.08.2025,30.08.2025,4,"224,09",2,"28,01",Coach House Launceston
+119,Australia,melbourne,booking.com,30.08.2025,03.09.2025,4,"202,79",2,"25,35",miami hotel melbourne
+120,Australia,melbourne to auckland,flight,03.09.2025,04.09.2025,1,0,2,"0,00",night flight auckland
+121,new zealand,new plymouth,booking.com,04.09.2025,05.09.2025,1,"40,23",2,"20,12",ariki hostel
+122,new zealand,new plymouth,workaway,05.09.2025,14.09.2025,9,0,2,"0,00",dee
