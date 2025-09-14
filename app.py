@@ -198,10 +198,53 @@ def create_world_map(df: pd.DataFrame) -> None:
     )
     st.plotly_chart(fig, use_container_width=True)
 
+def create_country_summary(df: pd.DataFrame) -> None:
+    """Group data by country and visualize total nights and total cost."""
+    # Group by country, summing nights and total price
+    grouped_df = df.groupby('country').agg({
+        'nights': 'sum',
+        'total price of stay': 'sum'
+    }).reset_index()
+
+    # Rename columns for clarity
+    grouped_df.columns = ['Country', 'Total Nights', 'Total Cost (€)']
+
+    # Display the grouped data table
+    st.write("### Summary by Country")
+    st.dataframe(grouped_df, use_container_width=True)
+
+    # Create two columns for visualizations
+    col1, col2 = st.columns(2)
+
+    # Bar chart for total nights
+    with col1:
+        fig_nights = px.bar(
+            grouped_df,
+            x='Country',
+            y='Total Nights',
+            title='Total Nights by Country',
+            labels={'Total Nights': 'Number of Nights'},
+            color='Country'
+        )
+        fig_nights.update_layout(showlegend=False)
+        st.plotly_chart(fig_nights, use_container_width=True)
+
+    # Bar chart for total cost
+    with col2:
+        fig_cost = px.bar(
+            grouped_df,
+            x='Country',
+            y='Total Cost (€)',
+            title='Total Cost by Country',
+            labels={'Total Cost (€)': 'Cost (€)'},
+            color='Country'
+        )
+        fig_cost.update_layout(showlegend=False)
+        st.plotly_chart(fig_cost, use_container_width=True)
 
 def create_cost_visualization(df: pd.DataFrame) -> None:
     """Create accommodation cost visualizations"""
-    cost_columns = ['total price of stay', 'cost', 'price', 'amount', 'total_cost', 'expense']
+    cost_columns = ['tyotal price of sta', 'cost', 'price', 'amount', 'total_cost', 'expense']
     cost_col = None
     for col in cost_columns:
         if col in df.columns:
@@ -471,7 +514,8 @@ def main() -> None:
     if not df.empty:
         # Accommodation Cost Analysis
         st.header("💰 Accommodation Cost Analysis")
-        create_cost_visualization(df)
+        #create_cost_visualization(df)
+        create_country_summary(df)
 
         st.markdown("---")
 
