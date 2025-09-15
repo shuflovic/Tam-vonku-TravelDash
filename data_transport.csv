@@ -34,7 +34,7 @@ id,date,from,to,type of transport,price per person ( EUR ),notes
 33,13.10.2024,oslo,krakow,flight,"80,90",
 34,20.10.2024,bratislava,sofia,flight,"17,99",
 35,20.10.2024,sofia,istanbul,train,"36,30",
-36,29.10.2024,istanbul,ulanbatar,plane,"231,50",mongolian airline
+36,29.10.2024,istanbul,ulanbatar,flight,"231,50",mongolian airline
 37,12.11.2024,ulanbatar,khakhorin,bus,"10,40",
 38,14.11.2024,khakhorin,ulanbatar,bus,"10,40",
 39,21.11.2024,ulanbatar,soul,flight,"151,50",jeju airline
@@ -45,5 +45,5 @@ id,date,from,to,type of transport,price per person ( EUR ),notes
 44,23.04.2025,haiphong,hanoi,bus,"4,38",
 45,23.06.2025,ho chi minh,melbourne,flight,150,jetstar
 46,24.06.2025,melbourne,hobart,flight,"37,09",jetstar
-
 47,30.08.2025,launceston,melbourne,flight,46,jetstar
+48,03.09.2025,melbourne,auckland,flight,"179,33",jetstar
