@@ -4,6 +4,7 @@ import plotly.express as px
 from datetime import datetime
 import os
 from typing import Dict, Any
+from flights import load_transport_data, create_flight_metrics
 
 # Page configuration
 st.set_page_config(
@@ -107,8 +108,6 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
         if 'accommodation' in df.columns:
             workaway_projects = df[df[type_col].str.lower() == 'workaway']['accommodation'].nunique()
             metrics['workaway_projects'] = workaway_projects
-
-    return metrics
 
     return metrics
 
@@ -575,6 +574,12 @@ def main() -> None:
 
     st.markdown("---")
 
+     # --- Flights Section ---
+    st.header("✈️ Flight Statistics")
+    df_transport = load_transport_data()
+    create_flight_metrics(df_transport)
+    st.markdown("---")
+    
     # Add the new world map visualization
     st.header("🌍 World Map of Visited Countries")
     create_world_map(df)
