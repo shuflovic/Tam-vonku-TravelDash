@@ -45,7 +45,12 @@ def create_flight_metrics(df: pd.DataFrame) -> None:
 
     # --- Table: flights from-to-price
     st.write("### ✈️ Flight Details")
-    st.dataframe(flight_df[['from', 'to', 'price per person ( EUR )']], use_container_width=True)
+    #st.dataframe(flight_df[['from', 'to', 'price per person ( EUR )']], use_container_width=True)
+    st.dataframe(
+        flight_df[['from', 'to', 'price per person ( EUR )']].reset_index(drop=True),
+        use_container_width=True
+    )
+
 
     # --- Total price
     total_price = flight_df['price per person ( EUR )'].sum()
