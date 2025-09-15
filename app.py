@@ -266,9 +266,20 @@ def create_country_summary(df: pd.DataFrame, order_by: str = 'id') -> None:
             'total price of stay': 'sum'
         }).reset_index()
 
+    grouped_df['average_cost'] = grouped_df['total price of stay'] / grouped_df['adjusted_nights'] / 2
+    # Calculate paid nights (where total price of stay > 0)
+    paid_nights = df_adjusted[df_adjusted['total price of stay'] > 0].groupby('country')['adjusted_nights'].sum().reset_index()
+    grouped_df = grouped_df.merge(paid_nights, on='country', how='left', suffixes=('', '_paid'))
+    grouped_df['adjusted_nights_paid'] = grouped_df['adjusted_nights_paid'].fillna(0)
+    # Calculate average cost per paid night per person
+    grouped_df['avg_cost_paid_night_person'] = grouped_df.apply(
+            lambda row: row['total price of stay'] / row['adjusted_nights_paid'] / 2 if row['adjusted_nights_paid'] > 0 else 0, axis=1
+        )
     # Rename columns for clarity
-    grouped_df.columns = ['Country', 'Total Adjusted Nights', 'Total Cost (€)']
-
+    grouped_df.columns = ['Country', 'Nights', 'Total Cost (€)', 'Average Person/Night (€)', 'Paid Nights', 'Average Cost per Paid Night/Person (€)']
+    # Format the average cost columns to 2 decimal places
+    grouped_df['Average Person/Night (€)'] = grouped_df['Average Person/Night (€)'].round(2)
+    grouped_df['Average Cost per Paid Night/Person (€)'] = grouped_df['Average Cost per Paid Night/Person (€)'].round(2)
     # Display the grouped data table
     st.write("### Summary by Country")
     st.dataframe(grouped_df, use_container_width=True)
@@ -281,9 +292,9 @@ def create_country_summary(df: pd.DataFrame, order_by: str = 'id') -> None:
         fig_nights = px.bar(
             grouped_df,
             x='Country',
-            y='Total Adjusted Nights',
-            title='Total Adjusted Nights by Country',
-            labels={'Total Adjusted Nights': 'Number of Nights'},
+            y='Nights',
+            title='Nights by Country',
+            labels={'Nights': 'Number of Nights'},
             color='Country'
         )
         fig_nights.update_layout(showlegend=False)
@@ -304,7 +315,7 @@ def create_country_summary(df: pd.DataFrame, order_by: str = 'id') -> None:
     
 def create_cost_visualization(df: pd.DataFrame) -> None:
     """Create accommodation cost visualizations"""
-    cost_columns = ['tyotal price of sta', 'cost', 'price', 'amount', 'total_cost', 'expense']
+    cost_columns = ['total price of stay', 'cost', 'price', 'amount', 'total_cost', 'expense']
     cost_col = None
     for col in cost_columns:
         if col in df.columns:
