@@ -14,6 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+
 @st.cache_data
 def load_data() -> pd.DataFrame:
     """Load and cache the accommodation data"""
@@ -499,41 +500,20 @@ def main() -> None:
                     (df[date_col].dt.date <= end_date)
                 ]
 
-    # Destination filter
-    destination_columns = ['destination', 'city', 'country', 'location']
-    dest_col = None
-    for col in destination_columns:
-        if col in df.columns:
-            dest_col = col
-            break
+            # Sidebar filter: Country only
+            st.sidebar.header("🔍 Filter by Country")
+            if "country" in df.columns:
+                countries = df["country"].dropna().unique()
+                selected_countries = st.sidebar.multiselect(
+                    "Select Country(s)",
+                    options=sorted(countries),
+                    default=sorted(countries)
+                )
+                if selected_countries:
+                    df = df[df["country"].isin(selected_countries)]
+            else:
+                st.sidebar.warning("No 'country' column found in the dataset.")
 
-    if dest_col:
-        destinations = df[dest_col].dropna().unique()
-        selected_destinations = st.sidebar.multiselect(
-            f"Select {dest_col.title()}(s)",
-            options=destinations,
-            default=destinations
-        )
-        if selected_destinations:
-            df = df[df[dest_col].isin(selected_destinations)]
-
-    # Booking platform filter
-    type_columns = ['platform', 'travel_type', 'type', 'category', 'mode']
-    type_col = None
-    for col in type_columns:
-        if col in df.columns:
-            type_col = col
-            break
-
-    if type_col:
-        platforms = df[type_col].dropna().unique()
-        selected_platforms = st.sidebar.multiselect(
-            "Select Booking Platform(s)",
-            options=platforms,
-            default=platforms
-        )
-        if selected_platforms:
-            df = df[df[type_col].isin(selected_platforms)]
 
     # Summary metrics
     st.header("📊 Summary Statistics")
