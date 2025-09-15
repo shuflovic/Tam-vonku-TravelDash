@@ -59,11 +59,11 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
                 metrics['days_on_road'] = total_days
 
     # Basic metrics
-    metrics['total_stays'] = df['accommodation'].nunique()
+    metrics['unique_places_stayed'] = df['accommodation'].nunique()
 
     # Add the new metric for unique countries visited
     if 'country' in df.columns:
-        metrics['total_countries_visited'] = df['country'].nunique()
+        metrics['visited_countries'] = df['country'].nunique()+1
 
     # Cost metrics if cost column exists
     cost_columns = ['total price of stay', 'cost', 'price', 'amount', 'total_cost', 'expense']
@@ -106,7 +106,7 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
         # Count the number of unique Workaway projects
         if 'accommodation' in df.columns:
             workaway_projects = df[df[type_col].str.lower() == 'workaway']['accommodation'].nunique()
-            metrics['unique_workaway_projects'] = workaway_projects
+            metrics['workaway_projects'] = workaway_projects
 
     return metrics
 
