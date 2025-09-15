@@ -1,0 +1,48 @@
+id,date,from,to,type of transport,price per person ( EUR ),notes
+1,28.01.2024,bratislava,vienna airport,bus,"9,90",
+2,28.01.2024,vienna,abu dhabi,flight,"49,58",5h 20m
+3,28.01.2024,abu dhabi airport,abu dhabi center,bus,"0,90",A1 bus 24/7 - 45 min
+4,31.01.2024,abu dhabi,dubai,bus,"6,25",
+5,04.02.2024,dubai,muscat,bus,"25,00",
+6,11.02.2024,muscat,muscat airport,bus,"1,20",up to 45 min
+7,11.02.2024,muscat,sharjah,flight,"26,00",air arabia
+8,11.02.2024,sharjah,colombo,flight,"100,00",air arabia
+9,11.04.2024,colombo,abu dhabi,flight,"194,51",
+10,11.04.2024,abu dhabi,budapest,flight,"163,29",
+11,13.04.2024,vienna,stockholm,flight,"31,37",
+12,01.06.2024,stockholm,backefors,train/bus,"41,19",
+13,22.06.2024,mellerud,gothenburg,train,"13,57",
+14,24.06.2024,gothenburg,stockholm,train,"39,98",
+15,25.06.2024,stockholm,ostersund,train,"43,26",
+16,29.07.2024,ostersund,storuman,bus,"34,86",
+17,06.08.2024,storuman,jokkmokk,bus,"34,86",
+18,17.08.2024,jokkmokk,storuman,bus,"36,21",
+19,19.08.2024,storuman,hemavan,bus,"22,27",
+20,28.08.2024,,ribnes lake,boat,"38,41",
+21,30.08.2024,mallenjarka,kvikkjokk,boat,"21,82",
+22,31.08.2024,,aktse,boat,"26,19",
+23,01.09.2024,,sitojaure,boat,"41,90",
+24,02.09.2024,saltoluokta,kebnats,boat,"15,28",
+25,03.09.2024,,teusajaure,boat,"13,09",
+26,02.09.2024,kebnats,vakkotavare,bus,"17,92",
+27,07.09.2024,abisko ,kiruna,bus,"17,66",not sure if 199 sek
+28,08.09.2024,kiruna,jokkmokk,bus,"30,36",
+29,11.09.2024,jokkmokk,ostersund,bus,"55,29",
+30,22.09.2024,ostersund ,stockholm,train,"35,59",50% discount due to 3 hours delay
+31,25.09.2024,stockholm,kristinehamn,bus,"22,10",
+32,25.09.2024,kristinehamn,arvika,train,"11,45",
+33,13.10.2024,oslo,krakow,flight,"80,90",
+34,20.10.2024,bratislava,sofia,flight,"17,99",
+35,20.10.2024,sofia,istanbul,train,"36,30",
+36,29.10.2024,istanbul,ulanbatar,plane,"231,50",mongolian airline
+37,12.11.2024,ulanbatar,khakhorin,bus,"10,40",
+38,14.11.2024,khakhorin,ulanbatar,bus,"10,40",
+39,21.11.2024,ulanbatar,soul,flight,"151,50",jeju airline
+40,18.12.2024,soul,tokio,flight,"85,98",zipair
+41,18.03.2025,tokio,hong kong,flight,"116,5",hong kong express
+42,06.04.2025,shenzhen,haikou,train,"52,5",trip.com
+43,20.04.2025,mong cai,haiphong,bus,"6,74",
+44,23.04.2025,haiphong,hanoi,bus,"4,38",
+45,23.06.2025,ho chi minh,melbourne,flight,150,jetstar
+46,24.06.2025,melbourne,hobart,flight,"37,09",jetstar
+47,30.08.2025,launceston,melbourne,flight,46,jetstar
