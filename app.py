@@ -379,21 +379,26 @@ def create_cost_visualization(df: pd.DataFrame) -> None:
                 st.plotly_chart(fig_box, use_container_width=True)
 
 def create_destination_visualization(df: pd.DataFrame) -> None:
-    """Pie chart: Nights spent per country"""
+    """Pie chart: Top 10 countries by nights spent"""
     if "country" not in df.columns or "nights" not in df.columns:
         st.warning("Dataset must have 'country' and 'nights' columns")
         return
 
-    # Group by country and sum nights
-    country_nights = df.groupby("country")["nights"].sum().sort_values(ascending=False)
+    # Group by country, sum nights, and take top 10
+    country_nights = (
+        df.groupby("country", as_index=True)["nights"]
+          .sum()
+          .nlargest(10)
+    )
 
     # Pie chart
     fig_pie = px.pie(
         values=country_nights.values,
         names=country_nights.index,
-        title="🌍 Nights Spent per Country"
+        title="🌍 Top 10 Countries by Nights Spent"
     )
     st.plotly_chart(fig_pie, use_container_width=True)
+
 
 
 def create_accommodation_patterns_visualization(df: pd.DataFrame) -> None:
@@ -577,16 +582,16 @@ def main() -> None:
         st.markdown("---")
 
         # Location Analysis
-        st.header("🌍 Accommodation Locations")
+        st.header("🌍 Time Spent by Country")
         create_destination_visualization(df)
 
         st.markdown("---")
 
         # Booking Patterns
-        st.header("📈 Booking Patterns")
-        create_accommodation_patterns_visualization(df)
+       # st.header("📈 Booking Patterns")
+       # create_accommodation_patterns_visualization(df)
 
-        st.markdown("---")
+        #st.markdown("---")
 
         # Data table
         st.header("📋 Raw Data")
