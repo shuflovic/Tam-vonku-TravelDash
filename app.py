@@ -379,41 +379,22 @@ def create_cost_visualization(df: pd.DataFrame) -> None:
                 st.plotly_chart(fig_box, use_container_width=True)
 
 def create_destination_visualization(df: pd.DataFrame) -> None:
-    """Create destination-related visualizations"""
-    destination_columns = ['destination', 'city', 'country', 'location']
-    dest_col = None
-    for col in destination_columns:
-        if col in df.columns:
-            dest_col = col
-            break
-
-    if not dest_col:
-        st.warning("No destination data found in the dataset")
+    """Pie chart: Nights spent per country"""
+    if "country" not in df.columns or "nights" not in df.columns:
+        st.warning("Dataset must have 'country' and 'nights' columns")
         return
 
-    col1, col2 = st.columns(2)
+    # Group by country and sum nights
+    country_nights = df.groupby("country")["nights"].sum().sort_values(ascending=False)
 
-    with col1:
-        # Top destinations bar chart
-        dest_counts = df[dest_col].value_counts().head(10)
-        fig_bar = px.bar(
-            x=dest_counts.index,
-            y=dest_counts.values,
-            title=f"Top 10 {dest_col.title()}s",
-            labels={'x': dest_col.title(), 'y': 'Number of Stays'}
-        )
-        fig_bar.update_xaxes(tickangle=45)
-        st.plotly_chart(fig_bar, use_container_width=True)
+    # Pie chart
+    fig_pie = px.pie(
+        values=country_nights.values,
+        names=country_nights.index,
+        title="🌍 Nights Spent per Country"
+    )
+    st.plotly_chart(fig_pie, use_container_width=True)
 
-    with col2:
-        # Destination pie chart
-        dest_counts_pie = df[dest_col].value_counts().head(8)
-        fig_pie = px.pie(
-            values=dest_counts_pie.values,
-            names=dest_counts_pie.index,
-            title=f"{dest_col.title()} Distribution"
-        )
-        st.plotly_chart(fig_pie, use_container_width=True)
 
 def create_accommodation_patterns_visualization(df: pd.DataFrame) -> None:
     """Create accommodation booking pattern visualizations"""
