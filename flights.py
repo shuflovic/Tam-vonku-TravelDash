@@ -33,7 +33,7 @@ def create_flight_metrics(df: pd.DataFrame) -> None:
         st.warning("No transport data available.")
         return
 
-    # Filter flights
+    # Filter flightss
     flight_df = df[df['type of transport'].str.lower() == "flight"]
 
     if flight_df.empty:
