@@ -81,7 +81,7 @@ def create_summary_metrics(df: pd.DataFrame) -> Dict[str, Any]:
     # Basic metrics
     metrics['unique_places_stayed'] = df['accommodation'].nunique()
     if 'country' in df.columns:
-        metrics['visited_countries'] = df['country'].nunique() + 1
+        metrics['visited_countries'] = df['country'].nunique()
     # Cost metrics
     cost_columns = ['total price of stay', 'cost', 'price', 'amount', 'total_cost', 'expense']
     cost_col = next((col for col in cost_columns if col in df.columns), None)
