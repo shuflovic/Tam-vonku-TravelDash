@@ -393,6 +393,65 @@ def create_accommodation_patterns_visualization(df: pd.DataFrame) -> None:
         )
         st.plotly_chart(fig_dow, use_container_width=True)
 
+
+
+
+def create_workaway_visualization(df: pd.DataFrame, id_ascending: bool = True):
+    """
+    Streamlit visualization for Workaway rows.
+    - Filters platform == 'workaway'
+    - Sorts rows by ID (if present, case-insensitive)
+    - Groups by ['country', 'accommodation'] and sums 'nights'
+    - Adds a summary row at the end with total nights
+    """
+    required = {"platform", "nights", "country", "accommodation"}
+    missing = required - set(map(str, df.columns))
+    if missing:
+        st.error(f"DataFrame missing required columns: {', '.join(missing)}")
+        return
+
+    workaway_df = df[df['platform'].astype(str).str.lower() == 'workaway'].copy()
+    if workaway_df.empty:
+        st.warning("No Workaway data found in dataframe.")
+        return
+
+    # detect ID column case-insensitive
+    id_col = next((c for c in workaway_df.columns if str(c).lower() == 'id'), None)
+
+    if id_col is not None:
+        workaway_df[id_col] = pd.to_numeric(workaway_df[id_col], errors='coerce')
+        workaway_df = workaway_df.sort_values(by=id_col, ascending=id_ascending, na_position='last')
+
+    workaway_df['nights'] = pd.to_numeric(workaway_df['nights'], errors='coerce').fillna(0)
+
+    grouped = (
+        workaway_df
+        .groupby(['country', 'accommodation'], sort=False, as_index=False)
+        .agg(total_nights=('nights', 'sum'))
+    )
+
+    # add summary row
+    total_nights_all = grouped['total_nights'].sum()
+    summary_row = pd.DataFrame({
+        "country": ["TOTAL"],
+        "accommodation": [""],
+        "total_nights": [total_nights_all]
+    })
+    grouped = pd.concat([grouped, summary_row], ignore_index=True)
+
+    # display
+    st.subheader("🌞 Workaway Summary by Accommodation (sorted by ID)")
+    st.dataframe(grouped, use_container_width=True)
+
+    # chart (exclude summary row to avoid messing up bars)
+    chart_data = grouped[grouped["country"] != "TOTAL"]
+    st.bar_chart(chart_data.set_index('accommodation')["total_nights"])
+
+
+
+
+
+
 def main() -> None:
     """Main application function"""
     st.title("🏨 Tam Vonku Dashboard")
@@ -462,6 +521,11 @@ def main() -> None:
         st.header("🌍 Time Spent by Country")
         create_destination_visualization(df)
         st.markdown("---")
+
+        st.header("🌞 Workaway Projects")
+        create_workaway_visualization(df)
+        st.markdown("---")
+        
         st.header("📋 Raw Data")
         st.dataframe(df, use_container_width=True)
         csv_data = df.to_csv(index=False)
