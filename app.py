@@ -538,5 +538,29 @@ def main() -> None:
     else:
         st.warning("No data matches the selected filters.")
 
+data = pd.read_csv("data.csv")
+
+location_platform_nights = data.groupby(['location', 'platform'])['nights'].sum()
+
+# 2. Sort the data in descending order and select the top 5
+top_5_combinations = location_platform_nights.sort_values(ascending=False).head(5)
+
+# 3. Define a function to display the number of nights
+def nights_formatter(pct, allvals):
+    absolute_nights = int(pct / 100. * sum(allvals))
+    return f"{absolute_nights} nights"
+
+fig, ax = plt.subplots()
+ax.pie(
+    top_5_combinations,
+    labels=top_5_combinations.index.map(lambda x: f"{x[0]} - {x[1]}"),
+    autopct=lambda pct: nights_formatter(pct, top_5_combinations),
+    pctdistance=0.7
+)
+ax.axis('equal')  # Ensures the pie chart is a circle
+st.write("Top 5 Location/Platform Combinations by Nights:")
+st.pyplot(fig)
+
+
 if __name__ == "__main__":
     main()
