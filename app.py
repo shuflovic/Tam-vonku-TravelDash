@@ -4,6 +4,7 @@ import plotly.express as px
 from datetime import datetime
 import os
 from typing import Dict, Any
+import matplotlib.pyplot as plt
 
 # Page configuration
 st.set_page_config(
@@ -538,11 +539,10 @@ def main() -> None:
     else:
         st.warning("No data matches the selected filters.")
 
-data = pd.read_csv("data.csv")
+data = pd.read_csv("travel_data.csv")
 
 location_platform_nights = data.groupby(['location', 'platform'])['nights'].sum()
 
-# 2. Sort the data in descending order and select the top 5
 top_5_combinations = location_platform_nights.sort_values(ascending=False).head(5)
 
 # 3. Define a function to display the number of nights
