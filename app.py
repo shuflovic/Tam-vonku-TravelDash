@@ -526,6 +526,9 @@ def main() -> None:
         st.header("🌞 Workaway Projects")
         create_workaway_visualization(df)
         st.markdown("---")
+
+        #st.write("Top 5 Location/Platform Combinations by Nights:")
+        #st.pyplot(fig)
         
         st.header("📋 Raw Data")
         st.dataframe(df, use_container_width=True)
@@ -558,8 +561,7 @@ ax.pie(
     pctdistance=0.7
 )
 ax.axis('equal')  # Ensures the pie chart is a circle
-st.write("Top 5 Location/Platform Combinations by Nights:")
-st.pyplot(fig)
+
 
 
 if __name__ == "__main__":
