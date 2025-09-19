@@ -52,7 +52,7 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 51,sweden,tvällen,workaway,25.09.2024,13.10.2024,18,"0,00",2,"0,00",housesitting/workaway
 52,poland,krakow,booking.com,13.10.2024,14.10.2024,1,"29,00",2,"14,50",dizzy daisy hostel
 53,slovakia,zlate moravce,home sweet home,14.10.2024,17.10.2024,3,"0,00",2,"0,00",home sweet home
-54,slovakia,donovaly,booking.com,17.10.2024,18.10.2024,1,"17,25",1,"17,25",chata spiezovec
+124,slovakia,donovaly,booking.com,17.10.2024,18.10.2024,1,"17,25",1,"17,25",chata spiezovec
 55,slovakia,donovaly,friends house,18.10.2024,19.10.2024,1,"0,00",1,"0,00",petrova chata
 56,slovakia,bratislava,Airbnb,18.10.2024,19.10.2024,1,"42,25",1,"42,25",bratislava apartments
 57,slovakia,bratislava,Airbnb,19.10.2024,20.10.2024,1,"42,25",2,"21,13",bratislava apartments
@@ -122,5 +122,6 @@ id,country,location,platform,check in,check out,nights,total price of stay,perso
 121,new zealand,new plymouth,booking.com,04.09.2025,05.09.2025,1,"40,23",2,"20,12",ariki hostel
 122,new zealand,new plymouth,workaway,05.09.2025,15.09.2025,10,0,2,"0,00",dee
 123,slovakia,nitra,home,17.10.2024,18.10.2024,1,0,1,"0,00",boris
-124,norway,oslo,transport,13.10.2024,13.10.2024,0,0,0,0,transfer
+54,norway,oslo,transport,13.10.2024,13.10.2024,0,0,0,0,transfer
+
 
